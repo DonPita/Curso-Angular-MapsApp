@@ -9,6 +9,11 @@ interface MarkerAndColor {
   marker: Marker
 }
 
+interface PlainMarker {
+  color: string,
+  lngLat: number[]
+}
+
 @Component({
   templateUrl: './markers-page.component.html',
   styleUrl: './markers-page.component.css'
@@ -36,6 +41,8 @@ export class MarkersPageComponent {
       center: this.currentLngLat, // starting position [lng, lat] Santaballa
       zoom: this.zoom, // starting zoom
     });
+
+    this.readFromLocalStorage();
     // Marcador en la posicion actual central del mapa
     // const marker = new Marker()
     // .setLngLat(this.currentLngLat)
@@ -68,6 +75,7 @@ export class MarkersPageComponent {
       .addTo(this.map);
 
     this.markers.push({ color, marker });
+    this.saveToLocalStorage();
   }
 
   //Borrar Marcador
@@ -82,5 +90,29 @@ export class MarkersPageComponent {
       zoom: this.zoom,
       center: marker.getLngLat(),
     })
+  }
+
+  //LocalStorage
+  saveToLocalStorage() {
+    const plainMarkers: PlainMarker[] = this.markers.map(({ color, marker }) => {
+      return {
+        color,
+        lngLat: marker.getLngLat().toArray()
+      }
+    });
+    //Se guarda en el localstorage como un string gracias a JSON
+    localStorage.setItem('plainMarkers', JSON.stringify(plainMarkers));
+  }
+
+  readFromLocalStorage() {
+    const plainMarkersString = localStorage.getItem('plainMarkers') ?? '[]';
+    const plainMarkers: PlainMarker[] = JSON.parse(plainMarkersString); //Se parsea a la inversa.
+
+    plainMarkers.forEach(({ color, lngLat }) => {
+      const [ lng, lat ] = lngLat;
+      const coords = new LngLat( lng, lat );
+
+      this.addMarker(coords, color);
+    });
   }
 }
