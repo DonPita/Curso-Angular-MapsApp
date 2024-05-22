@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 
-import { Map } from "mapbox-gl";
+import { LngLat, Map } from "mapbox-gl";
 
 @Component({
   templateUrl: './zoom-range-page.component.html',
@@ -11,6 +11,7 @@ export class ZoomRangePageComponent implements AfterViewInit {
 
   public zoom: number = 10;
   public map?: Map;
+  public lnglat: LngLat = new LngLat(-7.7167, 43.3333);
 
   @ViewChild('map') divMap?: ElementRef; //Referencia al HTML #map
 
@@ -22,7 +23,7 @@ export class ZoomRangePageComponent implements AfterViewInit {
     this.map = new Map({
       container: this.divMap?.nativeElement, // container ID
       style: 'mapbox://styles/mapbox/streets-v12', // style URL
-      center: [-7.7167, 43.3333], // starting position [lng, lat] Santaballa
+      center: this.lnglat, // starting position [lng, lat] Santaballa
       zoom: this.zoom, // starting zoom
     });
 

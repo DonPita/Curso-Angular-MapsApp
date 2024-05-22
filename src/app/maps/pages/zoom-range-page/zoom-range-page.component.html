@@ -16,8 +16,11 @@
   </div>
 
   <span class="form-label">
-    Zoom: {{ zoom | number:'2.2-2' }}
+
+    <b>Zoom:</b> {{ zoom | number:'2.2-2' }}
     <br>
-    Lng,Lat {{ 'sorpresa' }}
+    <b>Longitud:</b> {{ lnglat.wrap().lng | number: '2.2-2' }}
+    <b>Latitud:</b> {{ lnglat.wrap().lat | number: '2.2-2' }}
+
   </span>
 </div>
