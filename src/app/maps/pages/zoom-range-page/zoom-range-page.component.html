@@ -8,9 +8,8 @@
     <!--Referencia local a zoomInput para usar en el metodo, para que se vaya cambiando
     el zoom al mover la barra, como es un String lo que manda, al ser una caja de texto,
     despues en el método hay que pasarlo a numérico-->
-    <input (input)="zoomChanged(zoomInput.value)" [value]="zoom"
-      type="range" class="form-range px-2"
-      min="-2" max="18" #zoomInput>
+    <input (input)="zoomChanged(zoomInput.value)" [value]="zoom" type="range" class="form-range px-2" min="-2" max="18"
+      #zoomInput>
 
     <button (click)="zoomIn()" class="btn btn-primary">+</button>
   </div>
@@ -19,8 +18,8 @@
 
     <b>Zoom:</b> {{ zoom | number:'2.2-2' }}
     <br>
-    <b>Longitud:</b> {{ lnglat.wrap().lng | number: '2.2-2' }}
-    <b>Latitud:</b> {{ lnglat.wrap().lat | number: '2.2-2' }}
+    <b>Longitud:</b> {{ currentLngLat.wrap().lng | number: '2.2-2' }}
+    <b>Latitud:</b> {{ currentLngLat.wrap().lat | number: '2.2-2' }}
 
   </span>
 </div>
