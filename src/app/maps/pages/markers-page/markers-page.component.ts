@@ -75,4 +75,12 @@ export class MarkersPageComponent {
     this.markers[index].marker.remove(); //Eliminar del mapa
     this.markers.splice(index, 1); //Eliminar del arreglo
   }
+
+  //Moverse a Marcador
+  flyTo(marker: Marker) {
+    this.map?.flyTo({
+      zoom: this.zoom,
+      center: marker.getLngLat(),
+    })
+  }
 }
