@@ -3,15 +3,20 @@
 <div class="floating-range p-2">
 
   <div class="floating-content">
-    <button class="btn btn-primary">-</button>
+    <button (click)="zoomOut()" class="btn btn-primary">-</button>
 
-    <input type="range" class="form-range px-2" min="-2" max="18">
+    <!--Referencia local a zoomInput para usar en el metodo, para que se vaya cambiando
+    el zoom al mover la barra, como es un String lo que manda, al ser una caja de texto,
+    despues en el método hay que pasarlo a numérico-->
+    <input (input)="zoomChanged(zoomInput.value)" [value]="zoom"
+      type="range" class="form-range px-2"
+      min="-2" max="18" #zoomInput>
 
-    <button class="btn btn-primary">+</button>
+    <button (click)="zoomIn()" class="btn btn-primary">+</button>
   </div>
 
   <span class="form-label">
-    Zoom: {{ 10.123 }}
+    Zoom: {{ zoom | number:'2.2-2' }}
     <br>
     Lng,Lat {{ 'sorpresa' }}
   </span>
