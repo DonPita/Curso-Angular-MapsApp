@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 
-import { LngLat, Map, Marker } from 'mapbox-gl'
+import { Map, Marker } from 'mapbox-gl'
 
 @Component({
   selector: 'map-mini-map',
@@ -33,32 +33,38 @@ export class MiniMapComponent implements AfterViewInit {
       style: 'mapbox://styles/mapbox/streets-v12',
       center: this.lngLat,
       zoom: 15,
+      interactive: false //No se puede hacer nada con el mapa.
     });
-
-    this.createMarker();
-
-  }
-  //Marker
-  createMarker() {
-    if (!this.map) {
-      return;
-    }
-
-    const color = '#xxxxxx'.replace(/x/g, y => (Math.random() * 16 | 0).toString(16));
-    const lngLat = this.lngLat;
-    this.addMarker(lngLat, color);
-  }
-
-  addMarker(lngLat: [number, number] | undefined, color: string) {
-    if (!this.map) {
-      return;
-    }
-
-    const marker = new Marker({
-      color: color,
-    })
-      .setLngLat(lngLat!)
+    //Marker Solucion del patrón, solo son 21 lineas menos. GG
+    new Marker()
+      .setLngLat(this.lngLat)
       .addTo(this.map);
+
+
+    //Marker, mi Solucion
+    //this.createMarker();
   }
+
+  // createMarker() {
+  //   if (!this.map) {
+  //     return;
+  //   }
+
+  //   const color = '#xxxxxx'.replace(/x/g, y => (Math.random() * 16 | 0).toString(16));
+  //   const lngLat = this.lngLat;
+  //   this.addMarker(lngLat, color);
+  // }
+
+  // addMarker(lngLat: [number, number] | undefined, color: string) {
+  //   if (!this.map) {
+  //     return;
+  //   }
+
+  //   const marker = new Marker({
+  //     color: color,
+  //   })
+  //     .setLngLat(lngLat!)
+  //     .addTo(this.map);
+  // }
 
 }
