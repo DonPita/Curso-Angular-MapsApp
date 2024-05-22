@@ -76,6 +76,11 @@ export class MarkersPageComponent {
 
     this.markers.push({ color, marker });
     this.saveToLocalStorage();
+
+    //listener
+    marker.on('dragend', () => {
+      this.saveToLocalStorage();
+    })
   }
 
   //Borrar Marcador
@@ -109,8 +114,8 @@ export class MarkersPageComponent {
     const plainMarkers: PlainMarker[] = JSON.parse(plainMarkersString); //Se parsea a la inversa.
 
     plainMarkers.forEach(({ color, lngLat }) => {
-      const [ lng, lat ] = lngLat;
-      const coords = new LngLat( lng, lat );
+      const [lng, lat] = lngLat;
+      const coords = new LngLat(lng, lat);
 
       this.addMarker(coords, color);
     });
