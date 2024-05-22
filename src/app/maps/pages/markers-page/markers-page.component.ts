@@ -2,11 +2,20 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import { LngLat, Map, Marker } from "mapbox-gl";
 
+
+
+interface MarkerAndColor {
+  color: string,
+  marker: Marker
+}
+
 @Component({
   templateUrl: './markers-page.component.html',
   styleUrl: './markers-page.component.css'
 })
 export class MarkersPageComponent {
+
+  public markers: MarkerAndColor[] = [];
 
   public zoom: number = 10;
   public map?: Map;
@@ -58,7 +67,12 @@ export class MarkersPageComponent {
       .setLngLat(lngLat)
       .addTo(this.map);
 
-
+    this.markers.push({ color, marker });
   }
 
+  //Borrar Marcador
+  deleteMarker(index: number) {
+    this.markers[index].marker.remove(); //Eliminar del mapa
+    this.markers.splice(index, 1); //Eliminar del arreglo
+  }
 }
