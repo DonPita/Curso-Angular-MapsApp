@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'alone',
-    loadComponent: () => import('./alone/pages/alonePage/alonePage.component').then(m => m.AlonePageComponent),
+    loadComponent: () => import('./alone/pages/alone-page/alone-page.component').then(m => m.AlonePageComponent),
   },
   {
     path: '**',
