@@ -13,6 +13,7 @@ import { MarkersPageComponent } from './pages/markers-page/markers-page.componen
 import { PropertiesPageComponent } from './pages/properties-page/properties-page.component';
 import { ZoomRangePageComponent } from './pages/zoom-range-page/zoom-range-page.component';
 import { MapsLayoutComponent } from './layout/maps-layout/maps-layout.component';
+import { CounterAloneComponent } from '../alone/components/counter-alone/counter-alone.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MapsLayoutComponent } from './layout/maps-layout/maps-layout.component'
   ],
   imports: [
     CommonModule,
-    MapsRoutingModule
+    MapsRoutingModule,
+    CounterAloneComponent //Viene aqui por es Standalone
   ]
 })
 
